@@ -2,8 +2,11 @@ admin:1234
 :
 :
 fatin:1234
+<<<<<<< HEAD
 shakir:1234
 faton:9876
 aminah:4567
 ali:1234
 timah:1234
+=======
+>>>>>>> 7c3db30e36d0952a65321b1a39a74db552091d2d
