@@ -1,30 +1,19 @@
-import os
 import sys
 import threading
 import socket
-import tqdm
-import time
-
-def animation(msg):
-        for char in msg:
-                sys.stdout.write(char)
-                sys.stdout.flush()
-                time.sleep(0.1)
 
 class Server:
-    start = 'Welcome To Secure File Transfer\n'
-    animation(start)
+    print('\n')
+    print('\tWelcome To Secure File Transfer (SERVER)')
     print('\t___________________________________________\n')
-    S1 = '\tServer\n'
-    animation(S1)
 
     #create socket (TCP Protocol)
     def __init__(self):
         self.sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-        self.Terima_connections()
+        self.accept_connections()
     
     
-    def Terima_connections(self):
+    def accept_connections(self):
         ip = str(input('\tPlease Enter Server Ip Address : '))
         port = int(input('\tPleaase Enter Desired Port Number : '))
 
@@ -34,15 +23,16 @@ class Server:
 
         while 1:
             c, addr = self.sock.accept()   #accept connection rqest from the  client
-            print('-------------------------------------')
+            print('\t-------------------------------------')
             print('\tSuccessfully Connected to :' + addr[0])  #print client ip address
-            print('-------------------------------------')
+            print('\t-------------------------------------')
 
             #create thread
             threading.Thread(target=self.handle_client,args=(c,addr,)).start()
             
     def handle_client(self,c,addr):
         New = c.recv(1024)  #receive input user from client
+
         if New.decode() == "y":   #if new user
             with open("login.txt", "a+") as register:
                 username = c.recv(1024).decode()
